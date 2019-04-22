@@ -1,8 +1,22 @@
 #!/bin/bash
 clear; clear
-g++ $1 -g -std=c++0x -Wall -Wconversion -Wshadow -I /usr/local/include -o sol || exit
+fname="${1%.*}"
+ext="${1##*.}"
+
+if [[ "$ext" != "py" ]]; then
+  g++ $1 -g -std=c++0x -Wall -Wconversion -Wshadow -I /usr/local/include -o $fname || exit
+  cmd="./$fname"
+else
+  cmd="python $1"
+fi
 
 for i in *.in; do
     echo --- $i
-    ./sol < $i > o && (diff -y -w o ${i%.in}.[ao]?? > t || cat t) || cat o
+    eval "$cmd" < $i > o && (diff -y -w o ${i%.in}.[ao]?? > t || cat t) || cat o
 done
+#g++ $1 -g -std=c++0x -Wall -Wconversion -Wshadow -I /usr/local/include -o sol || exit
+#
+#for i in *.in; do
+#    echo --- $i
+#    ./sol < $i > o && (diff -y -w o ${i%.in}.[ao]?? > t || cat t) || cat o
+#done
