@@ -13,15 +13,15 @@ for f in ls(cur):
         trash.append(f)
 
 if trash:
-    print 'Detect those files and folds'
+    print ('Detect those files and folds')
     for i in trash:
-        print i
-    x = raw_input("Press 'y/n' to delete...")
+        print (i)
+    x = input("Press 'y/n' to delete...")
     if x == 'y':
         for i in trash:
-            print 'rm', i
+            print ('rm', i)
             if isfile(i):
                 remove(i)
             else:
                 rmtree(i)
-print 'Clean!'
+print ('Clean!')

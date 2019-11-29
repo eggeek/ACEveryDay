@@ -15,7 +15,7 @@ def work():
     parser.add_argument("problem")
     args = parser.parse_args()
     pid = args.problem
-    x = raw_input("Finish and delete [%s]? y/n" % pid)
+    x = input("Finish and delete [%s]? y/n" % pid)
     if x != 'n':
         move('%s/%s.cpp' % (pid, pid), '%s/%s.cpp' % (config['directory'], pid))
         rmtree(pid)
@@ -24,7 +24,7 @@ def work():
         idx = pid[len(str(cid)):]
         q = Query()
         db.update({'isSolved': True}, (q.contestId == cid) & (q.index == idx))
-    print "Done!"
+    print ("Done!")
 
 if __name__ == "__main__":
     work()
